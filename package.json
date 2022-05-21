@@ -1,16 +1,27 @@
 {
-	"name": "create-backend",
+	"name": "@mryasuo/create-backend",
 	"version": "1.0.0",
 	"description": "## Description",
 	"main": "index.js",
 	"scripts": {
 		"test": "echo \"Error: no test specified\" && exit 1"
 	},
+	"bin": {
+		"create-backend": "./index.js"
+	},
 	"repository": {
 		"type": "git",
-		"url": ""
+		"url": "git+https://github.com/MrYasuo/create-backend.git"
 	},
-	"author": "",
+	"keywords": [
+		"create-backend",
+		"MrYasuo",
+		"mryasuo",
+		"backend",
+		"create-fastify",
+		"create-express"
+	],
+	"author": "MrYasuo",
 	"license": "ISC",
 	"dependencies": {
 		"http-status": "^1.5.2",
