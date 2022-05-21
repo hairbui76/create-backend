@@ -1,0 +1,26 @@
+{
+	"env": {
+		"node": true,
+		"es6": true
+	},
+	"parserOptions": {
+		"ecmaVersion": "latest"
+	},
+	"extends": "eslint:recommended",
+	"rules": {
+		"no-bitwise": "off",
+		"no-plusplus": "off",
+		"func-names": "off",
+		"no-underscore-dangle": "off",
+		"consistent-return": "off",
+		"import/no-unresolved": "off",
+		"no-mixed-spaces-and-tabs": "off",
+		"no-unused-vars": [
+			"error",
+			{
+				"argsIgnorePattern": "^_",
+				"destructuredArrayIgnorePattern": "^_"
+			}
+		]
+	}
+}

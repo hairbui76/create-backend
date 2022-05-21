@@ -1,0 +1,22 @@
+{
+	"name": "create-backend",
+	"version": "1.0.0",
+	"description": "## Description",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1"
+	},
+	"repository": {
+		"type": "git",
+		"url": ""
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"http-status": "^1.5.2",
+		"kolorist": "^1.5.1",
+		"minimist": "^1.2.6",
+		"pino-http": "^7.0.0",
+		"prompts": "^2.4.2"
+	}
+}
