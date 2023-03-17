@@ -32,7 +32,27 @@ const appInit = (opts = {}) => {
 	});
 
 	/* ----------------- connect to database ---------------- */
-	db();
+	app
+		.register(db)
+		.then(() => {
+			console.log("connected to mongodb");
+
+			/* ----------------- start the server ----------------- */
+			app.listen(
+				{ port: config.BASE.PORT || 5000, host: config.BASE.HOSTNAME },
+				(err, address) => {
+					if (err) {
+						console.log(err);
+						process.exit(1);
+					}
+					console.log(`server listening on ${address}`);
+				}
+			);
+		})
+		.catch((err) => {
+			console.log(err);
+			process.exit(1);
+		});
 
 	/* -------------------- setup routes -------------------- */
 	app.get("/", async (req, res) => {

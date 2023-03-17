@@ -1,5 +1,5 @@
 {
-	"name": "template",
+	"name": "tra-cuu-mon-hoc",
 	"version": "1.0.0",
 	"description": "",
 	"main": "src/server.js",
@@ -30,7 +30,7 @@
 		"##services/*": "./src/services/*/index.js"
 	},
 	"scripts": {
-		"dev": "nodemon --trace-warnings --verbose src/server.js",
+		"dev": "nodemon -L --trace-warnings --verbose src/server.js",
 		"lint": "eslint .",
 		"lint:fix": "eslint --format codeframe .",
 		"prettier:check": "prettier --config .prettierrc.json --check .",
