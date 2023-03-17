@@ -6,6 +6,11 @@ const { errorHandler, notFoundHandler } = require("#middlewares");
 
 const { db, config } = require("#configs");
 
+/**
+ *
+ * @param {*} opts
+ * @returns {import("fastify").FastifyInstance}
+ */
 const appInit = (opts = {}) => {
 	const app = fastify(opts);
 

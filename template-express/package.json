@@ -35,7 +35,7 @@
 		"lint:fix": "eslint --format codeframe .",
 		"prettier:check": "prettier --config .prettierrc.json --check .",
 		"prettier:fix": "prettier --config .prettierrc.json --write .",
-		"prepare": "husky install",
+		"prepare": "git init && husky install",
 		"clean:cache": "rimraf node_modules/.cache",
 		"clean:lib": "rimraf node_modules package-lock.json",
 		"reinstall": "npm run clean:lib && npm install"
@@ -45,21 +45,21 @@
 	"dependencies": {
 		"compression": "^1.7.4",
 		"cors": "^2.8.5",
-		"dotenv": "^16.0.1",
-		"express": "^4.18.1",
+		"dotenv": "^16.0.3",
+		"express": "^4.18.2",
 		"express-mongo-sanitize": "^2.2.0",
-		"helmet": "^5.1.0",
-		"mongoose": "^6.3.3",
+		"helmet": "^6.0.1",
+		"mongoose": "^7.0.2",
 		"xss-clean": "^0.1.1"
 	},
 	"devDependencies": {
-		"eslint": "^8.15.0",
+		"eslint": "^8.36.0",
 		"eslint-formatter-codeframe": "^7.32.1",
-		"husky": "^8.0.1",
-		"lint-staged": "^12.4.1",
-		"nodemon": "^2.0.16",
-		"pino-pretty": "^7.6.1",
-		"prettier": "^2.6.2"
+		"husky": "^8.0.3",
+		"lint-staged": "^13.2.0",
+		"nodemon": "^2.0.21",
+		"pino-pretty": "^10.0.0",
+		"prettier": "^2.8.4"
 	},
 	"husky": {
 		"hooks": {

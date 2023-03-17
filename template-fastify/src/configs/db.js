@@ -3,10 +3,8 @@ const config = require("./config");
 
 const db = async () => {
 	try {
+		mongoose.set("strictQuery", true);
 		await mongoose.connect(config.DBUri);
-		// eslint-disable-next-line
-		// require("../../insertDB");
-		// eslint-disable-next-line
 		console.log("connected to mongodb");
 	} catch (err) {
 		// eslint-disable-next-line
