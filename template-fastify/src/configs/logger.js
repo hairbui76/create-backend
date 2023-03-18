@@ -1,4 +1,5 @@
 const pino = require("pino");
+const pretty = require("pino-pretty")
 const prettyPrint = {
 	colorize: true,
 	levelFirst: true,
@@ -7,11 +8,12 @@ const prettyPrint = {
 if (process.env.NODE_ENV !== "production") {
 	prettyPrint.ignore = "pid,hostname,reqId,res,req,responseTime";
 	prettyPrint.messageFormat =
-		"{msg} [{req.method} {req.url}:> {responseTime}ms]";
+	"{msg} [{req.method} {req.url}:> {responseTime}ms]";
 }
+const stream = pretty(prettyPrint);
 
 const pinocfg = {
-	prettyPrint,
+	stream,
 	serializers: {
 		req: function (req) {
 			return {
