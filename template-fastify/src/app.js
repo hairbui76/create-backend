@@ -4,7 +4,7 @@ const cors = require("@fastify/cors");
 const fastifyMultipart = require("@fastify/multipart");
 const { errorHandler, notFoundHandler } = require("#middlewares");
 
-const { db, config } = require("#configs");
+const { db, config, route } = require("#configs");
 
 /**
  *
@@ -35,8 +35,6 @@ const appInit = (opts = {}) => {
 	app
 		.register(db)
 		.then(() => {
-			console.log("connected to mongodb");
-
 			/* ----------------- start the server ----------------- */
 			app.listen(
 				{ port: config.BASE.PORT || 5000, host: config.BASE.HOSTNAME },
@@ -55,9 +53,7 @@ const appInit = (opts = {}) => {
 		});
 
 	/* -------------------- setup routes -------------------- */
-	app.get("/", async (req, res) => {
-		return res.send("Hello world!");
-	});
+	app.register(route);
 
 	/* --------------- not found route handler -------------- */
 	app.setNotFoundHandler(notFoundHandler);
