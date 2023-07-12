@@ -42,7 +42,7 @@ routes(app);
 /* -------------------- error handler ------------------- */
 app.use(errorHandler);
 
-app.listen(config.BASE.PORT, (err) => {
+app.listen(config.BASE.PORT, async (err) => {
 	if (err) console.log(err);
 	console.log(`Server is running at http://${config.HttpUrl}`);
 });
