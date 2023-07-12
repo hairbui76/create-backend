@@ -22,7 +22,20 @@ const {
 const cwd = process.cwd();
 
 const FRAMEWORKS = [
-	{ name: "fastify", color: red },
+	{
+		name: "fastify",
+		color: red,
+		variants: [
+			{
+				name: "fastify",
+				color: green,
+			},
+			{
+				name: "fastify-auth",
+				color: blue,
+			},
+		],
+	},
 	{ name: "express", color: yellow },
 ];
 
@@ -95,9 +108,25 @@ async function init() {
 						const frameworkColor = framework.color;
 						return {
 							title: frameworkColor(framework.name),
-							value: framework.name,
+							value: framework,
 						};
 					}),
+				},
+				{
+					type: (framework) =>
+						framework && framework.variants ? "select" : null,
+					name: "variant",
+					message: reset("Select a variant:"),
+					initial: 0,
+					choices: (framework) => {
+						return framework.variants.map((variant) => {
+							const variantColor = variant.color;
+							return {
+								title: variantColor(variant.name),
+								value: variant.name,
+							};
+						});
+					},
 				},
 			],
 			{
@@ -112,7 +141,7 @@ async function init() {
 	}
 
 	// user choice associated with prompts
-	const { framework, overwrite, packageName } = result;
+	const { framework, overwrite, packageName, variant } = result;
 
 	const root = path.join(cwd, targetDir);
 
@@ -123,7 +152,7 @@ async function init() {
 	}
 
 	// determine template
-	template = framework || template;
+	template = variant || framework?.name || template;
 
 	console.log(`\nScaffolding project in ${root}...`);
 
@@ -140,7 +169,9 @@ async function init() {
 		}
 	};
 
-	const files = fs.readdirSync(templateDir);
+	const excepts = ["package-lock.json", "node_modules"];
+
+	const files = fs.readdirSync(templateDir).filter((f) => !excepts.includes(f));
 	for (const file of files.filter((f) => f !== "package.json")) {
 		write(file);
 	}
@@ -168,7 +199,6 @@ async function init() {
 			console.log(`  ${pkgManager} run dev`);
 			break;
 	}
-	console.log();
 }
 
 function copy(src, dest) {
