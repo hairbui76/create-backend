@@ -1,0 +1,70 @@
+{
+	"compilerOptions": {
+		"baseUrl": ".",
+		"paths": {
+			"#models": [
+				"src/models/index.js"
+			],
+			"#models/*": [
+				"src/models/*.js"
+			],
+			"##models/*": [
+				"src/models/*/index.js"
+			],
+			"#middlewares": [
+				"src/middlewares/index.js"
+			],
+			"#middlewares/*": [
+				"src/middlewares/*.js"
+			],
+			"##middlewares/*": [
+				"src/middlewares/*/index.js"
+			],
+			"#configs": [
+				"src/configs/index.js"
+			],
+			"#configs/*": [
+				"src/configs/*.js"
+			],
+			"##configs/*": [
+				"src/configs/*/index.js"
+			],
+			"#routes": [
+				"src/routes/index.js"
+			],
+			"#routes/*": [
+				"src/routes/*.js"
+			],
+			"##routes/*": [
+				"src/routes/*/index.js"
+			],
+			"#controllers": [
+				"src/controllers/index.js"
+			],
+			"#controllers/*": [
+				"src/controllers/*.js"
+			],
+			"##controllers/*": [
+				"src/controllers/*/index.js"
+			],
+			"#utils": [
+				"src/utils/index.js"
+			],
+			"#utils/*": [
+				"src/utils/*.js"
+			],
+			"##utils/*": [
+				"src/utils/*/index.js"
+			],
+			"#services": [
+				"src/services/index.js"
+			],
+			"#services/*": [
+				"src/services/*.js"
+			],
+			"##services/*": [
+				"src/services/*/index.js"
+			],
+		}
+	}
+}

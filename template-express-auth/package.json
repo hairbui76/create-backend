@@ -1,0 +1,80 @@
+{
+	"name": "template-express",
+	"version": "1.0.0",
+	"description": "",
+	"main": "src/server.js",
+	"imports": {
+		"#models": "./src/models/index.js",
+		"#models/*": "./src/models/*.js",
+		"##models/*": "./src/models/*/index.js",
+		"#middlewares": "./src/middlewares/index.js",
+		"#middlewares/*": "./src/middlewares/*.js",
+		"##middlewares/*": "./src/middlewares/*/index.js",
+		"#configs": "./src/configs/index.js",
+		"#configs/*": "./src/configs/*.js",
+		"##configs/*": "./src/configs/*/index.js",
+		"#routes": "./src/routes/index.js",
+		"#routes/*": "./src/routes/*.js",
+		"##routes/*": "./src/routes/*/index.js",
+		"#controllers": "./src/controllers/index.js",
+		"#controllers/*": "./src/controllers/*.js",
+		"##controllers/*": "./src/controllers/*/index.js",
+		"#utils": "./src/utils/index.js",
+		"#utils/*": "./src/utils/*.js",
+		"##utils/*": "./src/utils/*/index.js",
+		"#handlers": "./src/handlers/index.js",
+		"#handlers/*": "./src/handlers/*.js",
+		"##handlers/*": "./src/handlers/*/index.js",
+		"#services": "./src/services/index.js",
+		"#services/*": "./src/services/*.js",
+		"##services/*": "./src/services/*/index.js"
+	},
+	"scripts": {
+		"dev": "nodemon --trace-warnings --verbose src/server.js",
+		"lint": "eslint .",
+		"lint:fix": "eslint --format codeframe .",
+		"prettier:check": "prettier --config .prettierrc.json --check .",
+		"prettier:fix": "prettier --config .prettierrc.json --write .",
+		"prepare": "git init && husky install",
+		"clean:cache": "rimraf node_modules/.cache",
+		"clean:lib": "rimraf node_modules package-lock.json",
+		"reinstall": "npm run clean:lib && npm install"
+	},
+	"author": "",
+	"license": "ISC",
+	"dependencies": {
+		"argon2": "^0.30.3",
+		"compression": "^1.7.4",
+		"cookie-parser": "^1.4.6",
+		"cors": "^2.8.5",
+		"dotenv": "^16.3.1",
+		"express": "^4.18.2",
+		"express-mongo-sanitize": "^2.2.0",
+		"helmet": "^7.0.0",
+		"http-status": "^1.6.2",
+		"ioredis": "^5.3.2",
+		"mongoose": "^7.3.3",
+		"paseto": "^3.1.4",
+		"xss-clean": "^0.1.1"
+	},
+	"devDependencies": {
+		"eslint": "^8.44.0",
+		"eslint-formatter-codeframe": "^7.32.1",
+		"husky": "^8.0.3",
+		"lint-staged": "^13.2.3",
+		"nodemon": "^3.0.1",
+		"pino-pretty": "^10.0.1",
+		"prettier": "^3.0.0"
+	},
+	"husky": {
+		"hooks": {
+			"pre-commit": "lint-staged"
+		}
+	},
+	"lint-staged": {
+		"src/**": [
+			"npm run prettier:fix",
+			"npm run lint"
+		]
+	}
+}
