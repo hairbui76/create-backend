@@ -47,6 +47,10 @@ const userSchema = new Schema(
 	}
 );
 
+userSchema.statics.getUpdatableInfo = function () {
+	return ["name", "username", "email", "phoneNumber", "dOB"];
+};
+
 const User = mongoose.model("User", userSchema);
 
 module.exports = User;

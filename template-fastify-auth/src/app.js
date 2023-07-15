@@ -4,7 +4,7 @@ const cors = require("@fastify/cors");
 const fastifyMultipart = require("@fastify/multipart");
 const { errorHandler, notFoundHandler } = require("#middlewares");
 
-const { db, config, route, redis } = require("#configs");
+const { db, config, route } = require("#configs");
 
 /**
  *
@@ -28,13 +28,18 @@ const appInit = async (opts = {}) => {
 		parseOptions: {},
 	});
 
-	app.addHook("onRequest", (request, _reply, done) => {
-		request.redis = redis;
-		done();
-	});
-
 	/* ----------------- connect to database ---------------- */
 	await app.register(db);
+
+	app.addHook("onRequest", (request, _reply, done) => {
+		const { cookies } = request;
+		const signedCookies = {};
+		for (const key in cookies) {
+			signedCookies[key] = request.unsignCookie(cookies[key]).value;
+		}
+		request.signedCookies = signedCookies;
+		done();
+	});
 
 	/* -------------------- setup routes -------------------- */
 	app.register(route);

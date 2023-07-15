@@ -66,11 +66,8 @@ const register = async (request, reply) => {
 };
 
 const logout = async (request, reply) => {
-	const accessTokenCookie = request.cookies.token || "";
-	const refreshTokenCookie = request.cookies.refreshToken || "";
-	const accessTokenSigned = request.unsignCookie(accessTokenCookie);
-	const refreshTokenSigned = request.unsignCookie(refreshTokenCookie);
-	await authService.logout(accessTokenSigned, refreshTokenSigned);
+	const { token, refreshToken } = request.signedCookies;
+	await authService.logout(token, refreshToken);
 	return reply
 		.cookie("token", "", { path: "/" })
 		.cookie("refreshToken", "", { path: "/" })

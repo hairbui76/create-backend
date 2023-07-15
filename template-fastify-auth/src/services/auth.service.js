@@ -70,9 +70,7 @@ const loginByUsername = async (username, password) => {
 	return user;
 };
 
-const logout = async (accessTokenSigned, refreshTokenSigned) => {
-	const token = accessTokenSigned.value;
-	const refreshToken = refreshTokenSigned.value;
+const logout = async (token, refreshToken) => {
 	if (!token && !refreshToken) return;
 	if (token && refreshToken) {
 		const [{ redisAccessId }, { redisRefreshId }] = await Promise.all([

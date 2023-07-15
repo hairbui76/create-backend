@@ -5,29 +5,26 @@ const redis = require("#configs/redis");
 const status = require("http-status");
 
 const verifyTokenHandler = async (request, _reply) => {
-	const accessTokenCookie = request.cookies.token;
-	if (!accessTokenCookie) {
-		const refreshTokenCookie = request.cookies.refreshToken;
-		if (!refreshTokenCookie)
-			throw new ApiError(status.UNAUTHORIZED, "Unauthorized");
-		const refreshTokenSigned = request.unsignCookie(refreshTokenCookie);
-		const refreshToken = refreshTokenSigned.value;
+	const { token, refreshToken } = request.signedCookies;
+	if (!token && !refreshToken)
+		throw new ApiError(status.UNAUTHORIZED, "Unauthorized");
+	if (!token) {
 		const payload = await paseto.decode(refreshToken, TOKEN.REFRESH_SECRET);
 		const { redisRefreshId, ...info } = payload;
 		const isExist = await redis.get(redisRefreshId);
 		if (!isExist)
 			throw new ApiError(status.UNAUTHORIZED, "Refresh token is invalid");
-		request.user = info;
+		const id = redisRefreshId.split("_")[1];
+		request.user = { ...info, id };
 		request.resetAccess = true;
 		return;
 	}
-	const accessTokenSigned = request.unsignCookie(request.cookies.token);
-	const accessToken = accessTokenSigned.value;
-	const payload = await paseto.decode(accessToken, TOKEN.SECRET);
+	const payload = await paseto.decode(token, TOKEN.SECRET);
 	const { redisAccessId, ...info } = payload;
 	const isExist = await redis.get(redisAccessId);
 	if (!isExist) throw new ApiError(status.UNAUTHORIZED, "Token is invalid");
-	request.user = info;
+	const id = redisAccessId.split("_")[1];
+	request.user = { ...info, id };
 };
 
 module.exports = { verifyTokenHandler };
