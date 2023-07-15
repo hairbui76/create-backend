@@ -12,9 +12,6 @@ const { config, pinocfg, routes, db } = require("#configs");
 const app = express();
 const logger = pinoHttp(pinocfg);
 
-/* ------------------ connect database ------------------ */
-db();
-
 /* ------------------------ cors ------------------------ */
 app.use(cors());
 
@@ -42,7 +39,10 @@ routes(app);
 /* -------------------- error handler ------------------- */
 app.use(errorHandler);
 
-app.listen(config.BASE.PORT, async (err) => {
-	if (err) console.log(err);
-	console.log(`Server is running at http://${config.HttpUrl}`);
-});
+/* ----------- connect database before listen ----------- */
+db().then(() =>
+	app.listen(config.BASE.PORT, async (err) => {
+		if (err) console.log(err);
+		console.log(`Server is running at http://${config.HttpUrl}`);
+	})
+);
