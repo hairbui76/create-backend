@@ -39,7 +39,9 @@ const FRAMEWORKS = [
 	{ name: "express", color: yellow },
 ];
 
-const TEMPLATES = FRAMEWORKS.map((f) => f.name);
+const TEMPLATES = FRAMEWORKS.flatMap(
+	(f) => f.variants?.map((v) => v.name) || f.name
+);
 
 const renameFiles = {
 	_gitignore: ".gitignore",
