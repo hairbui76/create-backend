@@ -14,7 +14,8 @@ const verifyTokenHandler = async (req, _res, next) => {
 		const isExist = await redis.get(redisRefreshId);
 		if (!isExist)
 			throw new ApiError(status.UNAUTHORIZED, "Refresh token is invalid");
-		req.user = info;
+		const id = redisRefreshId.split("_")[1];
+		req.user = { ...info, id };
 		req.resetAccess = true;
 		return next();
 	}
@@ -22,7 +23,8 @@ const verifyTokenHandler = async (req, _res, next) => {
 	const { redisAccessId, ...info } = payload;
 	const isExist = await redis.get(redisAccessId);
 	if (!isExist) throw new ApiError(status.UNAUTHORIZED, "Token is invalid");
-	req.user = info;
+	const id = redisAccessId.split("_")[1];
+	req.user = { ...info, id };
 	return next();
 };
 

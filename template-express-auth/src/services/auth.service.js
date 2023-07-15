@@ -7,7 +7,7 @@ const { TOKEN } = require("#configs/config");
 const status = require("http-status");
 
 const prepareAccessToken = async (info) => {
-	const { id, ...encodeInfo } = info;
+	let { id, ...encodeInfo } = info;
 	const redisAccessId = `ac_${id}`;
 	const accessToken = await paseto.encode(
 		{ ...encodeInfo, redisAccessId },

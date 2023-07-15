@@ -69,8 +69,8 @@ const logout = async (req, res) => {
 	const { token, refreshToken } = req.signedCookies;
 	await authService.logout(token, refreshToken);
 	return res
-		.cookie("token", "", { path: "/" })
-		.cookie("refreshToken", "", { path: "/" })
+		.clearCookie("token")
+		.clearCookie("refreshToken")
 		.send({ message: "Logout success" });
 };
 

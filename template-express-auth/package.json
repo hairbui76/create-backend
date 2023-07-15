@@ -30,6 +30,7 @@
 		"##services/*": "./src/services/*/index.js"
 	},
 	"scripts": {
+		"dev:worker": "nodemon --trace-warnings --verbose src/primary.js",
 		"dev": "nodemon --trace-warnings --verbose src/server.js",
 		"lint": "eslint .",
 		"lint:fix": "eslint --format codeframe .",
