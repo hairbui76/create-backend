@@ -131,3 +131,6 @@ yarn.lock
 # editor files
 .vscode
 .idea
+
+template-*/.git
+template-*/.husky
