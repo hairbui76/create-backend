@@ -1,4 +1,5 @@
 const { User } = require("#models");
+const cloudinary = require("#configs");
 const paseto = require("#configs/paseto");
 const redis = require("#configs/redis");
 const pw = require("#configs/password");
@@ -45,16 +46,28 @@ const prepareToken = async (info) => {
 };
 
 const register = async (info) => {
-	const { name, username, password, email, phoneNumber, dOB } = info;
-	const hashedPassword = await pw.hash(password);
-	const user = new User({
-		name,
-		username,
-		password: hashedPassword,
-		email,
-		phoneNumber,
-		dOB,
-	});
+	const { avatar, thumbnail } = info;
+	const newUser = {
+		name: info.name.value,
+		username: info.username.value,
+		email: info.email.value,
+		phoneNumber: info.phoneNumber.value,
+		dOB: info.dOB.value,
+		address: info.address.value,
+	};
+	if (avatar && thumbnail) {
+		[newUser.avatarUrl, newUser.thumbnailUrl] = await Promise.all([
+			cloudinary.upload(avatar),
+			cloudinary.upload(thumbnail),
+		]);
+	} else if (avatar) {
+		newUser.avatarUrl = await cloudinary.upload(avatar);
+	} else if (thumbnail) {
+		newUser.thumbnailUrl = await cloudinary.upload(thumbnail);
+	}
+	console.log(newUser);
+	newUser.password = await pw.hash(info.password.value);
+	const user = new User(newUser);
 	return user;
 };
 

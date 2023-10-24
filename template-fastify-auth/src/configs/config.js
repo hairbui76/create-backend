@@ -17,8 +17,8 @@ const config = {
 		DATABASE: process.env.MONGOOSE_DB_NAME,
 	},
 	CORS: {
-		methods: ["GET", "POST", "PATCH", "DELETE"],
-		origin: ["localhost:3000", "http://localhost:3000"],
+		methods: ["GET", "POST", "PATCH", "PUT", "DELETE"],
+		origin: true,
 		credentials: true,
 		optionsSuccessStatus: 200,
 	},
@@ -35,6 +35,11 @@ const config = {
 	REDIS: {
 		HOST: process.env.REDIS_HOST,
 		PORT: process.env.REDIS_PORT,
+	},
+	CLOUDINARY: {
+		CLOUD_NAME: process.env.CLOUDINARY_CLOUD_NAME,
+		API_KEY: process.env.CLOUDINARY_API_KEY,
+		API_SECRET: process.env.CLOUDINARY_API_SECRET,
 	},
 
 	get HttpUrl() {

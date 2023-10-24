@@ -26,6 +26,7 @@ const login = async (request, reply) => {
 	const user = await authService.loginByUsername(username, password);
 	const { accessToken, accessExp, refreshToken, refreshExp } =
 		await authService.prepareToken(user.getPublicInfo());
+	console.log(accessToken);
 	return reply
 		.cookie("token", accessToken, {
 			path: "/",

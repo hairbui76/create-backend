@@ -5,6 +5,7 @@ const route = require("./route");
 const password = require("./password");
 const paseto = require("./paseto");
 const redis = require("./redis");
+const cloudinary = require("./cloudinary");
 
 module.exports = {
 	db,
@@ -14,4 +15,5 @@ module.exports = {
 	password,
 	paseto,
 	redis,
+	cloudinary,
 };

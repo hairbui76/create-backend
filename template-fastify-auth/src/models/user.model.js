@@ -27,6 +27,17 @@ const userSchema = new Schema(
 			unique: true,
 		},
 		dOB: Date,
+		address: String,
+		avatarUrl: {
+			type: String,
+			default:
+				"https://i.pinimg.com/originals/f1/0f/f7/f10ff70a7155e5ab666bcdd1b45b726d.jpg",
+		},
+		thumbnailUrl: {
+			type: String,
+			default:
+				"https://previews.123rf.com/images/peshkov/peshkov1903/peshkov190301435/119868636-hand-drawing-creative-eco-globe-sketch-on-white-background-eco-friendly-and-green-concept.jpg",
+		},
 		disabled: {
 			type: Boolean,
 			default: false,

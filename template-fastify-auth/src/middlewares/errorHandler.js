@@ -2,7 +2,7 @@ const status = require("http-status");
 const { ApiError } = require("#utils");
 
 const errorHandler = (err, request, reply) => {
-	console.error(err);
+	console.trace(err);
 	if (err instanceof ApiError) {
 		return reply.code(err.statusCode).send({ message: err.message });
 	}
