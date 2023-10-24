@@ -36,7 +36,20 @@ const FRAMEWORKS = [
 			},
 		],
 	},
-	{ name: "express", color: yellow },
+	{
+		name: "express",
+		color: yellow,
+		variants: [
+			{
+				name: "express",
+				color: green,
+			},
+			{
+				name: "express-auth",
+				color: blue,
+			},
+		],
+	},
 ];
 
 const TEMPLATES = FRAMEWORKS.flatMap(
